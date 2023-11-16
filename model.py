@@ -21,9 +21,9 @@ def plot_predictions(train_data, train_labels,  test_data, test_labels,  predict
   # Set grids
   plt.grid(which='major', c='#cccccc', linestyle='--', alpha=0.5)
   # Some text
-  plt.title('Model Results', family='Arial', fontsize=14)
-  plt.xlabel('X axis values', family='Arial', fontsize=11)
-  plt.ylabel('Y axis values', family='Arial', fontsize=11)
+  plt.title('Model Results')
+  plt.xlabel('X axis values')
+  plt.ylabel('Y axis values')
   # Show
   plt.savefig('model_results.png', dpi=120)
 
@@ -75,7 +75,8 @@ tf.random.set_seed(1989)
 
 # Create a model using the Sequential API
 model = tf.keras.Sequential([
-    tf.keras.layers.Dense(1), 
+    tf.keras.layers.Input(shape=(1,)),
+    tf.keras.layers.Dense(2),
     tf.keras.layers.Dense(1)
     ])
 
@@ -98,6 +99,6 @@ mae_1 = np.round(float(mae(y_test, y_preds.squeeze()).numpy()), 2)
 mse_1 = np.round(float(mse(y_test, y_preds.squeeze()).numpy()), 2)
 print(f'\nMean Absolute Error = {mae_1}, Mean Squared Error = {mse_1}.')
 
-# Write metrics to file
+# Writing the metrics to file
 with open('metrics.txt', 'w') as outfile:
     outfile.write(f'\nMean Absolute Error = {mae_1}, Mean Squared Error = {mse_1}.')
