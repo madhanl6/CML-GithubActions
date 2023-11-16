@@ -3,7 +3,7 @@ on: [push]
 jobs:
   run:
     runs-on: ubuntu-latest
-    container: docker://dvcorg/cml-py3:latest
+    container: ghcr.io/iterative/cml:0-dvc2-base1
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -15,7 +15,6 @@ jobs:
           pip install -r requirements.txt
           python model.py
 
-          echo "##Model Metrics" > report.md
           cat metrics.txt >> report.md
-
+          echo "##Model Metrics" >> report.md
           cml comment create report.md
